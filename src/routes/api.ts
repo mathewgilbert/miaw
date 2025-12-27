@@ -1,4 +1,5 @@
 import { Elysia, t } from "elysia";
+import handlers from "../handlers";
 
 const routes = new Elysia({ prefix: '/api' })
 
@@ -14,7 +15,7 @@ routes.get(
     }
 )
 
-routes..post(
+routes.post(
   "/upload",
   async ({ body }) => {
     return handlers.upload(body.file);
@@ -28,7 +29,7 @@ routes..post(
     detail: {
       summary: "Upload File",
       description: "Endpoint for uploading a file to an external server",
-      tags: ["Upload"]
+      tags: ["Tools"]
     }
   }
 );
