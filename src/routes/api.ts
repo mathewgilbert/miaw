@@ -26,10 +26,6 @@ routes.post(
         description: "File to be uploaded"
       })
     }),
-    response: t.Object({
-        status: t.Boolean(),
-        result: t.String()
-    }),
     detail: {
       summary: "Upload File",
       description: "Endpoint for uploading a file to an external server",
@@ -41,12 +37,12 @@ routes.post(
 routes.get(
   "/status",
   () => ({
-    status: true,
+    status: 200,
     message: "miawww!"
   }),
   {
     response: t.Object({
-      status:  t.Boolean(),
+      status: t.Number(),
       message: t.String()
     }),
     detail: {
