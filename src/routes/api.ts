@@ -1,11 +1,24 @@
 import { Elysia, t } from "elysia";
 import handlers from "../handlers";
 
-const routes = new Elysia({ prefix: '/api' })
+const routes = new Elysia({ prefix: "/api" });
+
 routes.post(
   "/upload",
-  async ({ body }) => {
-    return handlers.upload(body.file);
+  async ({ body, set }) => {
+    try {
+      const result = await handlers.upload(body.file);
+      return {
+        status: 200,
+        result
+      };
+    } catch (err: any) {
+      set.status = 400;
+      return {
+        status: 400,
+        message: err.message
+      };
+    }
   },
   {
     body: t.Object({
@@ -22,15 +35,22 @@ routes.post(
 );
 
 routes.get(
-    '/status',
-    () => ({
-        status: 200,
-        message: 'pong'
+  "/status",
+  () => ({
+    status: 200,
+    message: "miawww!"
+  }),
+  {
+    response: t.Object({
+      status: t.Number(),
+      message: t.String()
     }),
-    {
-        response: t.Object({ message: t.String() }),
-        detail: { tags: ['Others'], summary: 'Ping', description: 'Ping To Server' }
+    detail: {
+      summary: "Ping",
+      description: "Ping to Server",
+      tags: ["Others"]
     }
-)
+  }
+);
 
 export default routes;
