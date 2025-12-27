@@ -1,9 +1,17 @@
-import { Elysia, t } from "elysia";
+import { Elysia, t } from 'elysia'
+import { swagger } from "@elysiajs/swagger";
 
-const app = new Elysia() 
+export default new Elysia() 
     .get('/', () => 'Hello Vercel Function')
-    .post('/', ({ body }) => body, {
-        body: t.Object({
-            name: t.String()
-        })
+    .use(
+      swagger({
+        path: "/docs",
+        documentation: {
+          info: {
+            title: "Miaw API",
+            version: "1.0.0",
+            description: ' description'
+          }
+        }
       })
+    );
