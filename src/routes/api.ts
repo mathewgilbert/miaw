@@ -26,6 +26,12 @@ routes.post(
         description: "File to be uploaded"
       })
     }),
+    response: t.Object({
+      status: t.Number(),
+      result: t.Object({
+        url: t.String()
+      })
+    }),
     detail: {
       summary: "Upload File",
       description: "Endpoint for uploading a file to an external server",
