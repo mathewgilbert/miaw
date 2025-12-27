@@ -10,7 +10,7 @@ export default new Elysia()
           info: {
             title: "Miaw API",
             version: "1.0.0",
-            description: ' description'
+            description: 'Miaw API Fast With Elysia.js'
           }
         }
       })
