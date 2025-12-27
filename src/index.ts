@@ -1,8 +1,11 @@
 import { Elysia, t } from 'elysia'
 import { swagger } from "@elysiajs/swagger";
+import { staticPlugin } from '@elysiajs/static';
+import apiRoutes from "./routes/api";
 
 export default new Elysia() 
-    .get('/', () => 'Hello Vercel Function')
+    .use(staticPlugin())
+    .use(apiRoutes)
     .use(
       swagger({
         path: "/docs",
