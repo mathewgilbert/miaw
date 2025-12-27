@@ -9,13 +9,13 @@ routes.post(
     try {
       const result = await handlers.upload(body.file);
       return {
-        status: 200,
+        status: true,
         result
       };
     } catch (err: any) {
       set.status = 400;
       return {
-        status: 400,
+        status: false,
         message: err.message
       };
     }
@@ -25,6 +25,12 @@ routes.post(
       file: t.File({
         description: "File to be uploaded"
       })
+    }),
+    response: t.Object({
+        status: t.Boolean(),
+        result: t.Object({
+            url: t.String()
+        })
     }),
     detail: {
       summary: "Upload File",
@@ -37,12 +43,12 @@ routes.post(
 routes.get(
   "/status",
   () => ({
-    status: 200,
+    status: true,
     message: "miawww!"
   }),
   {
     response: t.Object({
-      status: t.Number(),
+      status: t.Boolean(),
       message: t.String()
     }),
     detail: {
