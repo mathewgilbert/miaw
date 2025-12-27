@@ -5,22 +5,18 @@ const routes = new Elysia({ prefix: "/api" });
 
 routes.post(
   "/upload",
-  async ({ body, set }: { body: { file: File }; set: { status: number } }) => {
+  async ({ body, set }) => {
     try {
       const result = await handlers.upload(body.file);
       return {
         status: 200,
-        result: {
-          url: result.url
-        }
+        result
       };
     } catch (err: any) {
       set.status = 400;
       return {
         status: 400,
-        result: {
-          url: ""
-        }
+        message: err.message
       };
     }
   },
@@ -28,12 +24,6 @@ routes.post(
     body: t.Object({
       file: t.File({
         description: "File to be uploaded"
-      })
-    }),
-    response: t.Object({
-      status: t.Number(),
-      result: t.Object({
-        url: t.String()
       })
     }),
     detail: {
