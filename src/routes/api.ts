@@ -41,7 +41,7 @@ routes.post(
 routes.get(
   "/status",
   () => ({
-    status: 200,
+    status: true,
     message: "miawww!"
   }),
   {
