@@ -4,7 +4,11 @@ import { staticPlugin } from '@elysiajs/static';
 import apiRoutes from "./routes/api";
 
 export default new Elysia() 
-    .use(staticPlugin())
+    .use(
+        staticPlugin({
+            prefix: '/',
+        })
+    )
     .use(apiRoutes)
     .use(
       swagger({
