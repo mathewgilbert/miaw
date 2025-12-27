@@ -7,7 +7,3 @@ const app = new Elysia()
             name: t.String()
         })
       })
-
-console.log(
-  `🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`
-);
